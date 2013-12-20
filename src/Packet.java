@@ -10,7 +10,7 @@ public class Packet {
 	int nodeID;
 	String ip;
 	String keyword;
-	String word;
+	String word = "";
 	String[] urls;
 	String[] search_response;
 	String[] routing;
@@ -41,7 +41,7 @@ public class Packet {
 		
 		switch(type){
 		case 1:
-			System.out.println("Type 1 JOINING");
+			//System.out.println("Type 1 JOINING");
 			/*
 			 Type 
 			 nodeID
@@ -54,12 +54,11 @@ public class Packet {
 					+ nodeID + ","
 					+ gatewayID + ","
 					+ ip + ","
-					+ keyword + ","
-					+word;
+					+ keyword+ ",";
 			break;
 			
 		case 2:
-			System.out.println("Type 2 JOINING_NETWORK_RELAY");
+			//System.out.println("Type 2 JOINING_NETWORK_RELAY");
 			/*
 			 Type 
 			 nodeID
@@ -73,11 +72,11 @@ public class Packet {
 					+ gatewayID + ","
 					+ ip + ","
 					+ keyword + ","
-					+word;
+					+word+",";
 			break;
 			
 		case 3:
-			System.out.println("Type 3 ROUTING");
+			//System.out.println("Type 3 ROUTING");
 			/*
 			 Type 
 			 nodeID
@@ -98,7 +97,7 @@ public class Packet {
 			break;
 			
 		case 4:
-			System.out.println("Type 4 LEAVING");
+			//System.out.println("Type 4 LEAVING");
 			/*
 			 Type 
 			 nodeID
@@ -110,11 +109,11 @@ public class Packet {
 					+ gatewayID + ","
 					+ ip + ","
 					+ keyword + ","
-					+word;
+					+word+",";
 			break;
 			
 		case 5:
-			System.out.println("Type 5 INDEX");
+			//System.out.println("Type 5 INDEX");
 			/*
 			 Type 
 			 targetID
@@ -130,13 +129,13 @@ public class Packet {
 					+ ip + ","
 					+ keyword + ","
 					+word;//+urls;
-			for(int i=0; i<routing.length; i++){
+			for(int i=0; i<urls.length; i++){
 				sendingPacket = sendingPacket + "," +urls[i];	
 			}
 			break;
 			
 		case 6:
-			System.out.println("Type 6 SEARCH");
+			//System.out.println("Type 6 SEARCH");
 			/*
 			 Type 
 			 word
@@ -149,12 +148,12 @@ public class Packet {
 					+ nodeID + ","
 					+ gatewayID + ","
 					+ ip + ","
-					+ keyword + ","
-					+word;
+					+ keyword;// + ",";
+					//+word + ",";
 			break;
 			
 		case 7:
-			System.out.println("Type 7 SEARCH_RESPONSE");
+			//System.out.println("Type 7 SEARCH_RESPONSE");
 			/*
 			 Type 
 			 word
@@ -170,13 +169,13 @@ public class Packet {
 					+ ip + ","
 					+ keyword + ","
 					+word;//+search_response;
-			for(int i=0; i<routing.length; i++){
-				sendingPacket = sendingPacket +"," + search_response[i] ;	
+			for(int i=0; i<search_response.length; i++){
+				sendingPacket = sendingPacket +"," + search_response[i];	
 			}
 			break;
 			
 		case 8:
-			System.out.println("Type 8 PING");
+			//System.out.println("Type 8 PING");
 			/*
 			 Type 
 			 targetID
@@ -189,11 +188,11 @@ public class Packet {
 					+ gatewayID + ","
 					+ ip + ","
 					+ keyword + ","
-					+word;
+					+word +",";
 			break;
 			
 		case 9:
-			System.out.println("Type 9 ACK");
+			//System.out.println("Type 9 ACK");
 			/*
 			 Type 
 			 nodeID
@@ -205,11 +204,11 @@ public class Packet {
 					+ gatewayID + ","
 					+ ip + ","
 					+ keyword + ","
-					+word;
+					+word +",";
 			break;
 			
 		case 10:
-			System.out.println("Type 10 ACK_INDEX");
+			//System.out.println("Type 10 ACK_INDEX");
 			/*
 			 Type 
 			 nodeID
@@ -222,11 +221,11 @@ public class Packet {
 					+ gatewayID + ","
 					+ ip + ","
 					+ keyword + ","
-					+word;
+					+word +",";
 			break;
 			
 		default:
-			System.out.println("No such packet type");
+			System.out.println("No such packet type YIPPI KI YAY");
 			break;
 		}
 	}
@@ -234,3 +233,22 @@ public class Packet {
 		return sendingPacket;		
 	}
 }
+//String newLine = System.getProperty("line.separator");
+//System.out.println("Type = "+indexPacket.type + newLine + 
+//					"targetID = "+indexPacket.targetID + newLine + 
+//					"SenderId = "+indexPacket.senderID+ newLine+ 
+//					"nodeID = "+indexPacket.nodeID + newLine + 
+//					"gatewayID = "+indexPacket.gatewayID + newLine +
+//					"ip = "+indexPacket.ip + newLine + 
+//					"keyword = "+indexPacket.keyword+ newLine + 
+//					"word = "+indexPacket.word);
+
+//
+//System.out.println("Type = "+indexPacket.type);
+//System.out.println("targetID = "+indexPacket.targetID);
+//System.out.println("SenderId = "+indexPacket.senderID);
+//System.out.println("nodeID = "+indexPacket.nodeID);
+//System.out.println("gatewayID = "+indexPacket.gatewayID);
+//System.out.println("ip = "+indexPacket.ip);
+//System.out.println("keyword = "+indexPacket.keyword);
+//System.out.println("word = "+indexPacket.word);

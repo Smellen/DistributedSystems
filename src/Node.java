@@ -43,10 +43,10 @@ public class Node implements PeerSearchSimplified {
 		} catch (SocketException e1) {
 			e1.printStackTrace();
 		}
-		String[] notNeeded= {"  "};
+		String[] notNeeded= {"X"};
 		Packet indexPacket = new Packet(1, hashCode("bootstrap"), nodeID, 
 				nodeID, 0, "localhost", keyword,
-				keyword, notNeeded, notNeeded, notNeeded);
+			null, notNeeded, notNeeded, notNeeded);
 		
 		String dataBeingSent = indexPacket.sendingPacket();
 		byte[] sendingBytes = dataBeingSent.getBytes();
@@ -70,7 +70,7 @@ public class Node implements PeerSearchSimplified {
 		boolean result = true;
 		/*Creat  packet send it to all peers*/
 		
-		String[] notNeeded= {"  "};
+		String[] notNeeded= {"X"};
 		int ntNeeded = 0;
 		Packet indexPacket = new Packet(4, hashCode("bootstrap"), hashCode(keyword), 
 				nodeID, ntNeeded, "localhost", keyword,
@@ -79,9 +79,9 @@ public class Node implements PeerSearchSimplified {
 		String dataBeingSent = indexPacket.sendingPacket();
 		byte[] sendingBytes = dataBeingSent.getBytes();
 		
-		DatagramPacket joinNetWorkPacket = new DatagramPacket(sendingBytes, sendingBytes.length, ip, 8767);
+		DatagramPacket leavePacket = new DatagramPacket(sendingBytes, sendingBytes.length, ip, 8767);
 		try {
-			clientSocket.send(joinNetWorkPacket);
+			clientSocket.send(leavePacket);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -120,10 +120,11 @@ public class Node implements PeerSearchSimplified {
 		} catch (SocketException e1) {
 			e1.printStackTrace();
 		}
-		String[] notNeeded= {"  "};
+		String[] urls= {url};
+		String[] notNeeded= {"X"};
 		
 		Packet indexPacket = new Packet(5, hashCode(unique_words[1]), hashCode(keyword), nodeID, 0, "localhost", keyword,
-				unique_words[1], notNeeded, notNeeded, notNeeded);
+				unique_words[1], urls, notNeeded, notNeeded);
 		
 		String dataBeingSent = indexPacket.sendingPacket();
 		byte[] sendingBytes = dataBeingSent.getBytes();
@@ -147,11 +148,11 @@ public class Node implements PeerSearchSimplified {
 			e1.printStackTrace();
 		}
 		String[] notNeeded= {"  "};
-		Packet indexPacket = new Packet(6, hashCode("bootstrap"), hashCode(keyword), 
+		Packet searchPacket = new Packet(6, hashCode("bootstrap"), hashCode(keyword), 
 				nodeID, 0, "localhost", words[i],
 				keyword, notNeeded, notNeeded, notNeeded);
 
-		String dataBeingSent = indexPacket.sendingPacket();
+		String dataBeingSent = searchPacket.sendingPacket();
 		byte[] sendingBytes = dataBeingSent.getBytes();
 
 		DatagramPacket searchResultPacket = new DatagramPacket(sendingBytes, sendingBytes.length, ip, 8767);
@@ -160,6 +161,8 @@ public class Node implements PeerSearchSimplified {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		searchPacket = null;
 		clientSocket.close();
 	}//For loop
 		SearchResult[] result= new SearchResult[1];
